@@ -6,22 +6,24 @@ def criar(prompts):
         if c in "0123456789":
             numeros = numeros + c
 
+    converter_minusculo = texto.lower()
+
     cor = "verde"
-    if "rua " in texto or "Rua " in texto or "avenida" in texto or "Avenida" in texto or "bairro" in texto or "Bairro" in texto or "@" in texto:
+    if "rua " in converter_minusculo or "Rua " in converter_minusculo or "avenida" in converter_minusculo or "Avenida" in converter_minusculo or "bairro" in converter_minusculo or "Bairro" in converter_minusculo or "@" in converter_minusculo:
         cor = "amarelo"
-    if "bomba" in texto or "Bomba" in texto or "hackear" in texto or "Hackear" in texto:
+    elif "bomba" in converter_minusculo or "Bomba" in converter_minusculo or "hackear" in converter_minusculo or "Hackear" in converter_minusculo:
         cor = "amarelo"
-    if len(numeros) >= 8:
+    elif len(numeros) >= 8:
         cor = "amarelo"
-    if "cpf" in texto or "CPF" in texto or "senha" in texto or "Senha" in texto or "cartao" in texto or "cartão" in texto:
+    elif "cpf" in converter_minusculo or "CPF" in converter_minusculo or "senha" in converter_minusculo or "Senha" in converter_minusculo or "cartao" in converter_minusculo or "cartão" in converter_minusculo:
         cor = "vermelho"
-    if len(numeros) == 11 and "." in texto:
+    elif len(numeros) == 11 and "." in converter_minusculo:
         cor = "vermelho"
-    if len(numeros) == 16:
+    elif len(numeros) == 16:
         cor = "vermelho"
 
     if len(numeros) == 11:
-        texto = texto.replace(numeros, 'CPF')
+        converter_minusculo = converter_minusculo.replace(numeros, 'CPF')
 
     prompts.append([texto, cor])
     print("Resultado:", cor)
@@ -45,17 +47,18 @@ def atualizar(prompts):
     for c in texto:
         if c in "0123456789":
             numeros = numeros + c
+    converter_minusculo = texto.lower()
 
     cor = "verde"
-    if "rua " in texto or "Rua " in texto or "avenida" in texto or "Avenida" in texto or "bairro" in texto or "Bairro" in texto or "@" in texto:
+    if "rua " in converter_minusculo or "Rua " in converter_minusculo or "avenida" in converter_minusculo or "Avenida" in converter_minusculo or "bairro" in converter_minusculo or "Bairro" in converter_minusculo or "@" in converter_minusculo:
         cor = "amarelo"
-    if "bomba" in texto or "Bomba" in texto or "hackear" in texto or "Hackear" in texto:
+    if "bomba" in converter_minusculo or "Bomba" in converter_minusculo or "hackear" in converter_minusculo or "Hackear" in converter_minusculo:
         cor = "amarelo"
     if len(numeros) >= 8:
         cor = "amarelo"
-    if "cpf" in texto or "CPF" in texto or "senha" in texto or "Senha" in texto or "cartao" in texto or "cartão" in texto:
+    if "cpf" in converter_minusculo or "CPF" in converter_minusculo or "senha" in converter_minusculo or "Senha" in converter_minusculo or "cartao" in converter_minusculo or "cartão" in converter_minusculo:
         cor = "vermelho"
-    if len(numeros) == 11 and "." in texto:
+    if len(numeros) == 11 and "." in converter_minusculo:
         cor = "vermelho"
     if len(numeros) == 16:
         cor = "vermelho"
