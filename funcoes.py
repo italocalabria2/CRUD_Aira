@@ -20,6 +20,9 @@ def criar(prompts):
     if len(numeros) == 16:
         cor = "vermelho"
 
+    if len(numeros) == 11:
+        texto = texto.replace(numeros, 'CPF')
+
     prompts.append([texto, cor])
     print("Resultado:", cor)
 
@@ -69,3 +72,4 @@ def deletar(prompts):
         return
     prompts.pop(n - 1)
     print("Apagado!")
+
