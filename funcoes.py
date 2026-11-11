@@ -9,15 +9,15 @@ def criar(prompts):
     cor = "verde"
     if "rua " in texto or "Rua " in texto or "avenida" in texto or "Avenida" in texto or "bairro" in texto or "Bairro" in texto or "@" in texto:
         cor = "amarelo"
-    if "bomba" in texto or "Bomba" in texto or "hackear" in texto or "Hackear" in texto:
+    elif "bomba" in texto or "Bomba" in texto or "hackear" in texto or "Hackear" in texto:
         cor = "amarelo"
-    if len(numeros) >= 8:
+    elif len(numeros) >= 8:
         cor = "amarelo"
-    if "cpf" in texto or "CPF" in texto or "senha" in texto or "Senha" in texto or "cartao" in texto or "cartão" in texto:
+    elif "cpf" in texto or "CPF" in texto or "senha" in texto or "Senha" in texto or "cartao" in texto or "cartão" in texto:
         cor = "vermelho"
-    if len(numeros) == 11 and "." in texto:
+    elif len(numeros) == 11 and "." in texto:
         cor = "vermelho"
-    if len(numeros) == 16:
+    elif len(numeros) == 16:
         cor = "vermelho"
 
     if len(numeros) == 11:
