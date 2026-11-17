@@ -1,6 +1,10 @@
+palavras = {
+    "amarelo": ["rua ", "avenida", "bairro", "@", "bomba", "hackear"],
+    "vermelho": ["cpf", "senha", "cartao", "cartão"]
+}
 
-def criar(prompts):
-    texto = input("Digite o prompt: ")
+
+def descobrir_cor(texto):
     numeros = ""
     for c in texto:
         if c in "0123456789":
@@ -9,22 +13,27 @@ def criar(prompts):
     converter_minusculo = texto.lower()
 
     cor = "verde"
-    if "rua " in converter_minusculo or "Rua " in converter_minusculo or "avenida" in converter_minusculo or "Avenida" in converter_minusculo or "bairro" in converter_minusculo or "Bairro" in converter_minusculo or "@" in converter_minusculo:
+
+    for palavra in palavras["amarelo"]:
+        if palavra in converter_minusculo:
+            cor = "amarelo"
+    if len(numeros) >= 8:
         cor = "amarelo"
-    elif "bomba" in converter_minusculo or "Bomba" in converter_minusculo or "hackear" in converter_minusculo or "Hackear" in converter_minusculo:
-        cor = "amarelo"
-    elif len(numeros) >= 8:
-        cor = "amarelo"
-    elif "cpf" in converter_minusculo or "CPF" in converter_minusculo or "senha" in converter_minusculo or "Senha" in converter_minusculo or "cartao" in converter_minusculo or "cartão" in converter_minusculo:
+
+    for palavra in palavras["vermelho"]:
+        if palavra in converter_minusculo:
+            cor = "vermelho"
+    if len(numeros) == 11 and "." in converter_minusculo:
         cor = "vermelho"
-    elif len(numeros) == 11 and "." in converter_minusculo:
-        cor = "vermelho"
-    elif len(numeros) == 16:
+    if len(numeros) == 16:
         cor = "vermelho"
 
-    if len(numeros) == 11:
-        converter_minusculo = converter_minusculo.replace(numeros, 'CPF')
+    return cor
 
+
+def criar(prompts):
+    texto = input("Digite o prompt: ")
+    cor = descobrir_cor(texto)
     prompts.append([texto, cor])
     print("Resultado:", cor)
 
@@ -43,26 +52,7 @@ def atualizar(prompts):
         print("Numero invalido")
         return
     texto = input("Digite o novo prompt: ")
-    numeros = ""
-    for c in texto:
-        if c in "0123456789":
-            numeros = numeros + c
-    converter_minusculo = texto.lower()
-
-    cor = "verde"
-    if "rua " in converter_minusculo or "Rua " in converter_minusculo or "avenida" in converter_minusculo or "Avenida" in converter_minusculo or "bairro" in converter_minusculo or "Bairro" in converter_minusculo or "@" in converter_minusculo:
-        cor = "amarelo"
-    if "bomba" in converter_minusculo or "Bomba" in converter_minusculo or "hackear" in converter_minusculo or "Hackear" in converter_minusculo:
-        cor = "amarelo"
-    if len(numeros) >= 8:
-        cor = "amarelo"
-    if "cpf" in converter_minusculo or "CPF" in converter_minusculo or "senha" in converter_minusculo or "Senha" in converter_minusculo or "cartao" in converter_minusculo or "cartão" in converter_minusculo:
-        cor = "vermelho"
-    if len(numeros) == 11 and "." in converter_minusculo:
-        cor = "vermelho"
-    if len(numeros) == 16:
-        cor = "vermelho"
-
+    cor = descobrir_cor(texto)
     prompts[n - 1] = [texto, cor]
     print("Atualizado! Resultado:", cor)
 
@@ -75,4 +65,3 @@ def deletar(prompts):
         return
     prompts.pop(n - 1)
     print("Apagado!")
-

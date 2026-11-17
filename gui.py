@@ -1,34 +1,11 @@
-#ESSE É O FRONT END FEITO POR IA (confome autorizado)
-#!!!!!!!!!!!!!!!!!!
+#FRONT END FEITO POR IA(CONFORME AUTORIZADO)
+
 import tkinter as tk
 from tkinter import messagebox, ttk
+import funcoes as f
 
 
 prompts = []
-
-
-def classificar_prompt_manual(texto):
-    """Classifica a cor do texto seguindo as regras do seu projeto"""
-    numeros = ""
-    for c in texto:
-        if c in "0123456789":
-            numeros = numeros + c
-
-    cor = "verde"
-    if any(p in texto for p in ["rua ", "Rua ", "avenida", "Avenida", "bairro", "Bairro", "@"]):
-        cor = "amarelo"
-    if any(p in texto for p in ["bomba", "Bomba", "hackear", "Hackear"]):
-        cor = "amarelo"
-    if len(numeros) >= 8:
-        cor = "amarelo"
-    if any(p in texto for p in ["cpf", "CPF", "senha", "Senha", "cartao", "cartão"]):
-        cor = "vermelho"
-    if len(numeros) == 11 and "." in texto:
-        cor = "vermelho"
-    if len(numeros) == 16:
-        cor = "vermelho"
-
-    return cor
 
 
 def atualizar_tabela():
@@ -43,7 +20,7 @@ def btn_criar():
     if not texto:
         messagebox.showwarning("Aviso", "Digite um prompt!")
         return
-    cor = classificar_prompt_manual(texto)
+    cor = f.descobrir_cor(texto)
     prompts.append([texto, cor])
     entry_prompt.delete(0, tk.END)
     atualizar_tabela()
@@ -62,7 +39,7 @@ def btn_atualizar():
         messagebox.showwarning("Aviso", "Digite o novo texto no campo de texto!")
         return
 
-    cor = classificar_prompt_manual(novo_texto)
+    cor = f.descobrir_cor(novo_texto)
     prompts[indice] = [novo_texto, cor]
     entry_prompt.delete(0, tk.END)
     atualizar_tabela()
