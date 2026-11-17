@@ -8,6 +8,7 @@ while True:
     print("2 - Listar")
     print("3 - Atualizar")
     print("4 - Deletar")
+    print("5 - Buscar")
     print("0 - Sair")
     op = input("Escolha: ")
 
@@ -19,6 +20,8 @@ while True:
         f.atualizar(prompts)
     elif op == "4":
         f.deletar(prompts)
+    elif op =="5":
+        f.buscar(prompts)
     elif op == "0":
         break
     else:

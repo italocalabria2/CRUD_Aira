@@ -71,3 +71,21 @@ def deletar(prompts):
         return
     prompts.pop(n - 1)
     print("Apagado!")
+
+
+def buscar(prompts):
+    if len(prompts) == 0:
+        print("Nenhum prompt")
+        return
+
+    palavra = input("Digite a palavra para buscar: ")
+    palavra = palavra.lower()
+
+    achou = False
+    for i in range(len(prompts)):
+        if palavra in prompts[i][0].lower():
+            print(i + 1, "-", prompts[i][0], "-", prompts[i][1])
+            achou = True
+
+    if achou == False:
+        print("Nada encontrado")
