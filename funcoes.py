@@ -34,6 +34,12 @@ def descobrir_cor(texto):
 def criar(prompts):
     texto = input("Digite o prompt: ")
     cor = descobrir_cor(texto)
+    numeros = ""
+    for c in texto:
+        if c in "0123456789":
+            numeros = numeros + c
+    if len(numeros) == 11:
+        texto = texto.replace(numeros, "CPF")
     prompts.append([texto, cor])
     print("Resultado:", cor)
 
