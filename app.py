@@ -17,23 +17,27 @@ while True:
     print("7 - Recuperar via backup.")
     print("0 - Encerrar o programa.")
     print("---------------------------------")
-    op = input("Qual a opção desejada? ")
+    try:
+        op = int(input("Qual a opção desejada? "))
+    except ValueError:
+        print("Entrada inválida. Por favor, digite um número.")
+        continue
 
-    if op == "1":
+    if op == 1:
         f.criar(prompts)
-    elif op == "2":
+    elif op == 2:
         f.listar(prompts)
-    elif op == "3":
+    elif op == 3:
         f.atualizar(prompts)
-    elif op == "4":
+    elif op == 4:
         f.deletar(prompts)
-    elif op =="5":
+    elif op == 5:
         f.buscar(prompts)
-    elif op =="6":
+    elif op == 6:
         f.salvar_backup(prompts)
-    elif op =="7":
+    elif op == 7:
         prompts = f.recuperar_backup()
-    elif op == "0":
+    elif op ==  0:
         print("------------------------")
         print("Programa encerrado.")
         break

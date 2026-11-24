@@ -17,8 +17,8 @@ def validar_cpf(numero):
         lista_digitos.append(int(digito))
 
     # checa se os dígitos são todos iguais
-    # if sum(lista_digitos) == (lista_digitos[0]*11):
-    #     return False
+    if sum(lista_digitos) == (lista_digitos[0]*11):
+        return False
 
     soma_1 = 0
     lista_pesos_1 = list(range(10, 1, -1))
@@ -131,7 +131,13 @@ def atualizar(prompts):
     listar(prompts)
     if len(prompts) == 0:
        return
-    n = int(input("Qual número do prompt que deseja mudar? "))
+    
+    try:
+        print("Atenção! Adicionar um valor invalido irá retornar ao menu principal sem atualizar nenhum prompt.")
+        n = int(input("Qual número do prompt que deseja mudar? "))
+    except ValueError:
+        print("Entrada inválida. Por favor, digite um número.")
+        return
     if n < 1 or n > len(prompts):
         print("Número invalido")
         return
@@ -151,7 +157,13 @@ def deletar(prompts):
     listar(prompts)
     if len(prompts) == 0:
         return
-    n = int(input("Qual número do prompt que deseja apagar? "))
+    
+    try:
+        print("Atenção! Adicionar um valor invalido irá retornar ao menu principal sem apagar nenhum prompt.")
+        n = int(input("Qual número do prompt que deseja apagar? "))
+    except ValueError:
+        print("Entrada inválida. Por favor, digite um número.")
+        return
     if n < 1 or n > len(prompts):
         print("Número invalido")
         return
