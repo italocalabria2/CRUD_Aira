@@ -233,9 +233,13 @@ def recuperar_backup(prompts):
         else:
             print("Valor incorreto. Favor informar 'S' para 'Sim' e 'N' para 'Não'.")
     nome_arquivo = "prompts.txt"
-    backup = open(nome_arquivo, "r", encoding="UTF-8")
-    lista_prompts = backup.readlines()
-    backup.close()
+    try:
+        backup = open(nome_arquivo, "r", encoding="UTF-8")
+        lista_prompts = backup.readlines()
+        backup.close()
+    except FileNotFoundError:
+        print("Nenhum backup encontrado. Salve um backup antes de tentar recuperar.")
+        return prompts
     for linha in lista_prompts:
         linha = linha.rstrip('\n')
         if linha == '':

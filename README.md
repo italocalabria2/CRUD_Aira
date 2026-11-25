@@ -58,12 +58,6 @@ gui.py       Interface gráfica (tkinter)
 prompts.txt  Arquivo de backup
 ```
 
-## Limitações conhecidas
-
-- A interface gráfica (`gui.py`) ainda não tem backup nem máscara de CPF.
-- Um prompt que contenha `**` corrompe a leitura do backup.
-- Recuperar sem existir `prompts.txt` gera erro.
-
 ## Equipe
 
 Ítalo Calábria, Lucas Gabriel, Rosa Cozzi, Luiz Fernando Cruz da Silva, Raphael Ting e João Guilherme.
