@@ -215,7 +215,7 @@ def salvar_backup(prompts):
             print("Valor incorreto. Favor informar 'S' para 'Sim' e 'N' para 'Não'.")
     nome_arquivo = "prompts.txt"
     backup = open(nome_arquivo, "w", encoding="UTF-8")
-    for i, prompt in enumerate(prompts):
+    for prompt in prompts:
        backup.write(f"{prompt[0]}**{prompt[1]}\n")
     backup.close()
     print("Backup criado com sucesso! Você pode encontrá-lo no arquivo prompts.txt.")
