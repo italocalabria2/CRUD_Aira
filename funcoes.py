@@ -2,7 +2,7 @@ import re
 
 palavras = {
     "amarelo": ["rua ", "avenida", "bairro", "@", "bomba", "hackear"],
-    "vermelho": ["cpf", "senha", "cartao", "cartão", "rg"]
+    "vermelho": ["cpf", "senha", "cartao", "cartão"]
 }
 
 
@@ -131,7 +131,8 @@ def atualizar(prompts):
     listar(prompts)
     if len(prompts) == 0:
        return
-    
+    numeros = []
+    numeros_original = []
     try:
         print("Atenção! Adicionar um valor invalido irá retornar ao menu principal sem atualizar nenhum prompt.")
         n = int(input("Qual número do prompt que deseja mudar? "))
@@ -143,6 +144,15 @@ def atualizar(prompts):
         return
     texto = input("Digite seu novo prompt: ")
     cor = descobrir_cor(texto)
+    for palavra in texto.split():
+    # retirando coisas que não são dígitos
+        palavra_sem_simbolos = re.sub(r"\D", "", palavra)
+        if len(palavra_sem_simbolos) > 0:
+            numeros.append(palavra_sem_simbolos)
+            numeros_original.append(palavra)
+    for id, numero in enumerate(numeros):
+        if validar_cpf(numero):
+            texto = texto.replace(numeros_original[id], "[CPF]")
     prompts[n - 1] = (texto, cor)
     if cor == "vermelho":
         resposta = "Vermelho = PERIGO! Alta probabilidade de vazamento de dados sensíveis."
@@ -210,8 +220,8 @@ def salvar_backup(prompts):
     backup.close()
     print("Backup criado com sucesso! Você pode encontrá-lo no arquivo prompts.txt.")
 
-def recuperar_backup():
-    prompts = []
+def recuperar_backup(prompts):
+    prompts_backup = []
     nao_aceito = True
     while nao_aceito:   
         print("Atenção! Esta operação irá remover todos os prompts da memória e substituí-los pelos prompts do arquivo.")
@@ -219,15 +229,19 @@ def recuperar_backup():
         if cont == "S":
             nao_aceito = False
         elif cont == "N":
-            return
+            return prompts
         else:
             print("Valor incorreto. Favor informar 'S' para 'Sim' e 'N' para 'Não'.")
     nome_arquivo = "prompts.txt"
     backup = open(nome_arquivo, "r", encoding="UTF-8")
     lista_prompts = backup.readlines()
+    backup.close()
     for linha in lista_prompts:
+        linha = linha.rstrip('\n')
+        if linha == '':
+            continue
         termos = linha.split("**")
         prompt = (termos[0], termos[1])
-        prompts.append(prompt)
+        prompts_backup.append(prompt)
     print("Prompts importados com sucesso!")
-    return prompts
+    return prompts_backup

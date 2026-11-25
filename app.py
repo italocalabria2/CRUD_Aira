@@ -36,7 +36,7 @@ while True:
     elif op == 6:
         f.salvar_backup(prompts)
     elif op == 7:
-        prompts = f.recuperar_backup()
+        prompts = f.recuperar_backup(prompts)
     elif op ==  0:
         print("------------------------")
         print("Programa encerrado.")
